@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE config PUBLIC "" "config.dtd">
+
+<config>
+	<tamPob>100</tamPob>
+	<numCro>1024</numCro>
+	<nGen>75</numCro>
+</config>
