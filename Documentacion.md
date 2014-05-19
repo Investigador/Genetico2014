@@ -39,6 +39,13 @@ La explicación es sencilla:
 
 Nos quedamos definitivamente con la tercera debido a que mejora mucho el tiempo de ejecución y consumo de memoria. Para más detalles se puede consultar esta tabla comparativa realizada con anterioridad: [Comparativa entre estructuras de datos] (https://github.com/rotty11/MiRepositorio/blob/master/ev_crom_explicacion.md).
 
+Por otro lado, para aumentar la eficiencia del algoritmo COUNT_ONES, existían dos posibilidades:
+
+  - Método de la Lookup Table: descrito y analizado [aquí] (https://github.com/rotty11/MiRepositorio/blob/master/ev_fitness_explicacion.md)
+  - Llamada a una subrutina que usa la instrucción popcount propia del procesador
+
+Nos hemos decidido por ésta última dado que es más eficiente que la anterior al hacer uso directo de instrucciones ensamblador.
+
 #####Mutación:
 ```cpp
 // Realizo mutacion en cada individuo de la poblacion de 1 o varios bits
