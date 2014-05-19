@@ -1,7 +1,19 @@
-Documentación de op_mut&cross.cpp
+Documentación del proyecto
 =================================
 
-Lo podeis encontrar en [op_mut&cross.cpp] (https://github.com/rotty11/MiRepositorio/blob/master/op_mut&cross.cpp). En este programa sólo se muestra la inicialización de los cromosomas a 1 ó 0 aleatoriamente y posteriormente se hará una mutación a uno o varios cromosomas. Después se realiza un crossover entre dos individuos cualesquiera usando la técnica del crossover en dos puntos. La estructura de datos usada será la mejor que se ha obtenido hasta ahora. Esto es:
+Lo podeis encontrar en mi repositorio [Genetico2014] (https://github.com/rotty11/Genetico2014). En este proyecto, distribuído bajo licencia GPLv3, se ha realizado una librería para la gestión de individuos y poblaciones necesaria para la creación de un algoritmo genético base. En la raíz del proyecto os debéis encontrar con una estructura similar a esta:
+
+  - bin
+  - doc
+  - include
+  - lib
+  - obj
+  - res
+  - src
+  - config.xml
+  - LICENSE
+  - Makefile
+viduos cualesquiera usando la técnica del crossover en dos puntos. La estructura de datos usada será la mejor que se ha obtenido hasta ahora. Esto es:
 
   - Usando un unsigned char por cada 8 cromosomas
 
