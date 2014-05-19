@@ -42,18 +42,13 @@ Nos quedamos definitivamente con la tercera debido a que mejora mucho el tiempo 
   - Método de la Lookup Table: descrito y analizado [aquí] (https://github.com/rotty11/MiRepositorio/blob/master/ev_fitness_explicacion.md)
   - Llamada a una subrutina que usa la instrucción `pop` propia del procesador
 
-Nos hemos decidido por ésta última dado que es más eficiente que la anterior al hacer uso directo de instrucciones ensamblador.
+Nos hemos decidido por esta última dado que es más eficiente que la anterior al hacer uso directo de instrucciones ensamblador.
 
 #####Las librerías:
 
-Lo que se ha hecho es crear dos clases: La clase Poblacion y la clase Individuo. Sus nombres ya dicen implícitamente lo que hacen. De esta forma, se ofrece una API con sus correspondientes interfaces que abstraen al usuario de la implementación interna de la misma. Por este motivo, se han creado funciones para la gestión de las librerías logrando la creación de un algoritmo genético con sólo llamadas a las mismas. También se ha tenido en cuenta que la interfaz de las funciones deben servir por igual tanto a un programa creado por un usuario como a los programas que realizan tests sobre estas funciones y que son tenidas en cuenta a la hora de realizar la integración continua.
+Lo que se ha hecho es crear dos clases: La clase Poblacion y la clase Individuo. Sus nombres ya dicen implícitamente lo que hacen. De esta forma, se ofrece una API con sus correspondientes interfaces que abstraen al usuario de la implementación interna de la misma. Por este motivo, se han creado funciones para la gestión de las librerías logrando la creación de un algoritmo genético con sólo llamadas a las mismas. También se ha tenido en cuenta que la interfaz de las funciones deben servir por igual tanto a un programa creado por un usuario como a los programas que realizan tests sobre estas funciones y que son tenidos en cuenta a la hora de realizar la integración continua. Más información sobre cómo funcionan estas funciones se pueden encontrar en el directorio `doc` del proyecto, concretamente en la carpeta `html`. Para ello, deberá compilar el proyecto mediante el `Makefile` incluído y se generarán los ficheros `.html` correspondientes. A continuación se explica algunas opciones del Makefile.
 
-	Unsigned char anterior(Dec / Bin): 26 / 00011010
-	Unsigned char generado(Dec / Bin): 51 / 00110011
-	
-Como se ve, cambian 3 bits. Por tanto, se han mutado 3 cromosomas.
-
-#####Crossover en dos puntos:
+#####Compilación de los ejecutables que conforman el proyecto:
 ```cpp
 // Realizo crossover entre dos individuos cogidos al azar (No me fijo en fitness ni nada)
 // Utilizo el crossover entre dos puntos tambien elegidos al azar
