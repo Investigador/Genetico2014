@@ -29,7 +29,7 @@ Pasándolo a código, respectivamente, sería:
   vector< vector<unsigned char> > POB2(tamPob, vector<unsigned char>(numCro));
   vector< vector<unsigned char> > POB3(tamPob, vector<unsigned char>(numCro8));
   ```
-  Donde `tamPob` es el tamaño de la población, `numCro` es el número de cromosomas por individuo y `numCro8` es el número de cromosomas por individuo entre 8.
+Donde `tamPob` es el tamaño de la población, `numCro` es el número de cromosomas por individuo y `numCro8` es el número de cromosomas por individuo entre 8.
 
 La explicación es sencilla:
 
@@ -44,15 +44,9 @@ Nos quedamos definitivamente con la tercera debido a que mejora mucho el tiempo 
 
 Nos hemos decidido por ésta última dado que es más eficiente que la anterior al hacer uso directo de instrucciones ensamblador.
 
-#####Mutación:
-```cpp
-// Realizo mutacion en cada individuo de la poblacion de 1 o varios bits
-for(itPOB = POB.begin(); itPOB != POB.end(); ++itPOB) {
-	int cromosoma = rand() % numCro8;
-	(*itPOB)[cromosoma] = rand() % 256;
-}
-```
-Lo que hacemos es mutar un unsigned char completo (0-255), aleatoriamente, lo que daría lugar a mutar en el mayor de los casos 8 bits, y por tanto 8 cromosomas. Así, en la representación binaria del unsigned char podría cambiar el estado de algunos bits, de uno sólo o de ninguno, según el número que le toque. Ejemplo:
+#####Las librerías:
+
+Lo que se ha hecho es crear dos clases: La clase Poblacion y la clase Individuo. Sus nombres ya dicen implícitamente lo que hacen. De esta forma, se ofrece una API con sus correspondientes interfaces que abstraen al usuario de la implementación interna de la misma. Por este motivo, se han creado funciones para la gestión de las librerías logrando la creación de un algoritmo genético con sólo llamadas a las mismas. También se ha tenido en cuenta que la interfaz de las funciones deben servir por igual tanto a un programa creado por un usuario como a los programas que realizan tests sobre estas funciones y que son tenidas en cuenta a la hora de realizar la integración continua.
 
 	Unsigned char anterior(Dec / Bin): 26 / 00011010
 	Unsigned char generado(Dec / Bin): 51 / 00110011
