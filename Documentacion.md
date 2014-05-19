@@ -1,5 +1,5 @@
 Documentación del proyecto
-=================================
+==========================
 
 Lo podeis encontrar en mi repositorio [Genetico2014] (https://github.com/rotty11/Genetico2014). En este proyecto, distribuído bajo licencia GPLv3, se ha realizado una librería para la gestión de individuos y poblaciones necesaria para la creación de un algoritmo genético base. En la raíz del proyecto os debéis encontrar con una estructura similar a esta:
 
@@ -13,9 +13,31 @@ Lo podeis encontrar en mi repositorio [Genetico2014] (https://github.com/rotty11
   - config.xml
   - LICENSE
   - Makefile
-viduos cualesquiera usando la técnica del crossover en dos puntos. La estructura de datos usada será la mejor que se ha obtenido hasta ahora. Esto es:
 
+#####Creación del programa:
+
+Teníamos 3 opciones base para la gestión de las poblaciones, individuos y cromosomas. A saber:
+
+  - Usando booleanos
+  - Usando un unsigned char por cada cromosoma
   - Usando un unsigned char por cada 8 cromosomas
+
+Pasándolo a código, respectivamente, sería:
+
+  ```c++
+  vector< vector<bool> > POB1(tamPob, vector<bool>(numCro));
+  vector< vector<unsigned char> > POB2(tamPob, vector<unsigned char>(numCro));
+  vector< vector<unsigned char> > POB3(tamPob, vector<unsigned char>(numCro8));
+  ```
+  Donde `tamPob` es el tamaño de la población y `numCro` es el número de cromosomas por individuo.
+
+La explicación es sencilla:
+
+  - En el primero, cada cromosoma toma false o true. Un booleano ocupa 1 byte de memoria
+  - En el segundo, cada cromosoma toma 0 o 1. Un unsigned char ocupa 1 byte de memoria
+  - En el tercero, cada unsigned char es un 1 byte = 8 bits, y cada bit será un cromosoma. De esta forma el vector se reduce a la octava parte.
+
+Nos quedamos definitivamente con la tercera debido a que mejora mucho el tiempo de ejecución y consumo de memoria. Para más detalles se puede consultar esta tabla comparativa realizada con anterioridad: [Comparativa entre estructuras de datos] (https://github.com/rotty11/MiRepositorio/blob/master/ev_crom_explicacion.md).
 
 #####Mutación:
 ```cpp
