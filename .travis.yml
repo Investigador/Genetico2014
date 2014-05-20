@@ -1,4 +1,7 @@
 language: cpp
 compiler:
   - gcc
+install: 
+  - wget http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.bz2/download -O /usr/include/boost_1_55_0.tar.bz2
+  - tar --bzip2 -xf /usr/include/boost_1_55_0.tar.bz2
 script: make
