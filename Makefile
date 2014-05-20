@@ -34,7 +34,7 @@ ag.o : $(SRC)/ag.cpp
 test.o: $(SRC)/test.cpp
 	$(CXX) $(CPPFLAGS) $(XMLFLAGS) $(SRC)/test.cpp -o $(OBJ)/test.o
 generadorR.o: $(SRC)/generadorR.cpp
-	$(CXX) $(CPPFLAGS) $(XMLFLAGS) -std=c++0x $(SRC)/generadorR.cpp -o $(OBJ)/generadorR.o
+	$(CXX) $(CPPFLAGS) $(XMLFLAGS) $(SRC)/generadorR.cpp -o $(OBJ)/generadorR.o
 
 # ************ Bibliotecas ************
 

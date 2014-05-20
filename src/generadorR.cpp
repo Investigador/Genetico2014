@@ -53,10 +53,10 @@ int main(int argc, char *argv[]) {
 		fitMejor.append(",");
 	}
 
-	// Elimino la última cobra sobrante y cierro el conjunto con un paréntesis
-	fitTotal.pop_back();
-	fitMedia.pop_back();
-	fitMejor.pop_back();
+	// Elimino la última coma sobrante y cierro el conjunto con un paréntesis
+	fitTotal.erase(fitTotal.size()-1);
+	fitMedia.erase(fitMedia.size()-1);
+	fitMejor.erase(fitMejor.size()-1);
 	fitTotal.append(")");
 	fitMedia.append(")");
 	fitMejor.append(")");
