@@ -46,9 +46,44 @@ Nos hemos decidido por esta última dado que es más eficiente que la anterior a
 
 #####Las librerías:
 
-Lo que se ha hecho es crear dos clases: La clase Poblacion y la clase Individuo. Sus nombres ya dicen implícitamente lo que hacen. De esta forma, se ofrece una API con sus correspondientes interfaces que abstraen al usuario de la implementación interna de la misma. Por este motivo, se han creado funciones para la gestión de las librerías logrando la creación de un algoritmo genético con sólo llamadas a las mismas. También se ha tenido en cuenta que la interfaz de las funciones deben servir por igual tanto a un programa creado por un usuario como a los programas que realizan tests sobre estas funciones y que son tenidos en cuenta a la hora de realizar la integración continua. Más información sobre cómo funcionan estas funciones se pueden encontrar en el directorio `doc` del proyecto, concretamente en la carpeta `html`. Para ello, deberá compilar el proyecto mediante el `Makefile` incluído y se generarán los ficheros `.html` correspondientes. A continuación se explica algunas opciones del Makefile.
+Lo que se ha hecho es crear dos clases: La clase Poblacion y la clase Individuo. Sus nombres ya dicen implícitamente lo que hacen. De esta forma, se ofrece una API con sus correspondientes interfaces que abstraen al usuario de la implementación interna de la misma. Por este motivo, se han creado funciones para la gestión de las librerías logrando la creación de un algoritmo genético con sólo llamadas a las mismas. También se ha tenido en cuenta que la interfaz de las funciones deben servir por igual tanto a un programa creado por un usuario como a los programas que realizan tests sobre estas funciones y que son tenidos en cuenta a la hora de realizar la integración continua. Más información sobre cómo funcionan estas funciones se pueden encontrar en el directorio `doc` del proyecto, concretamente en la carpeta `html`. Para ello, deberá compilar el proyecto usando el `Makefile` incluído y se generarán los ficheros `.html` correspondientes. A continuación se explica algunas opciones del Makefile.
 
 #####Compilación de los ejecutables que conforman el proyecto:
+
+Para construir todo el proyecto, basta abrir un intérprete de órdenes, dirigirse a la raíz del proyecto y ejecutar la orden `make`. Con ello, estamos construyendo lo siguiente:
+
+  - Ejecutables: (En la carpeta bin)
+    - ag
+    - test
+    - generadorR
+  - Librerías estáticas: (En la carpeta lib)
+    - Individuo.a
+    - Poblacion.a
+  - Documentación de Doxygen: (En la carpeta doc/html)
+
+Además, podemos ejecutar las órdenes `make clean` para borrar ficheros con código objeto y de edición (los acabados en ~), y `make mrproper` para borrar todo aquello que es construído con `make` (binarios, librerías, documentación y código objeto) además de los ficheros con resultados de las ejecuciones de los programas.
+
+#####Funcionamiento y ejecución de los programas:
+
+El primer programa que deberíamos echar a funcionar sería el test. Éste se encarga de comprobar que los operadores principales de un algoritmo genético implementados en las librerías funcionan correctamente. Para ejecutar el programa nos situamos en la raíz del proyecto y ejecutamos:
+
+  ```bash
+  ./bin/test
+  ```
+  
+Todos los parámetros de configuración, tales como el número de generaciones a generar, tamaño de la población y el número de cromosomas por individuo son leídos desde un fichero .xml situado en el directorio actual y que contiene lo siguiente:
+
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE config PUBLIC "" "config.dtd">
+
+  <config>
+	<tamPob>100</tamPob>
+	<numCro>1024</numCro>
+	<nGen>75</numCro>
+  </config>
+  ```
+
 ```cpp
 // Realizo crossover entre dos individuos cogidos al azar (No me fijo en fitness ni nada)
 // Utilizo el crossover entre dos puntos tambien elegidos al azar
