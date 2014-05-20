@@ -94,11 +94,11 @@ Ahora procedemos a ejecutar nuestro algoritmo genético. Para ello, sin movernos
 
 Se habrá creado en la carpeta `res` un fichero .xml con la estadística relacionada. El nombre de dicho archivo estará estructurado y mostrará los parámetros usados en la ejecución del algoritmo. Así, el fichero `genetico2014-3-100-1024-24545` significa:
 
-  -`genetico2014` es el nombre del evento (Así lo he querido yo).
-  -`3` es el número de generaciones a generar
-  -`100` es el número de individuos que componen una población
-  -`1024` es el número de cromosomas que tiene un individuo
-  -`24545` es la hora de finalización de la ejecución en el formato `min(2)-hora(45)-seg(45)`
+  - `genetico2014` es el nombre del evento (Así lo he querido yo).
+  - `3` es el número de generaciones a generar
+  - `100` es el número de individuos que componen una población
+  - `1024` es el número de cromosomas que tiene un individuo
+  - `24545` es la hora de finalización de la ejecución en el formato `min(2)-hora(45)-seg(45)`
   
 El contenido de dicho fichero estará compuesto por los parámetros usados (Nº de generaciones, Nº de individuos y Nº de cromosomas), estádistica de fitness de la población para cada generación (sumatoria, media y máximo) y por último el tiempo (en segundos) empleado en la ejecución del algoritmo. A continuación se muestra el fichero generado para el fichero de configuración anterior:
 
