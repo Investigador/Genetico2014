@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 	char NumG[100], aux[100];
 
 	// Leo los datos
-	for(int i =  1; i < nGen; ++i) {
+	for(int i =  0; i < nGen; ++i) {
 		sprintf(NumG, "resultados.gen%d", i);
 		sprintf(aux, "%s.totalFitness", NumG);
 		fitTotal.append(pt.get<string>(aux));
