@@ -50,7 +50,7 @@ Lo que se ha hecho es crear dos clases: La clase Poblacion y la clase Individuo.
 
 #####Compilación de los ejecutables que conforman el proyecto:
 
-Para construir todo el proyecto, basta abrir un intérprete de órdenes, dirigirse a la raíz del proyecto y ejecutar la orden `make`. Con ello, estamos construyendo lo siguiente:
+Para construir todo el proyecto, basta con abrir un intérprete de órdenes, dirigirse a la raíz del proyecto y ejecutar la orden `make`. Con ello, estamos construyendo lo siguiente:
 
   - Ejecutables: (En la carpeta bin)
     - ag
@@ -71,7 +71,7 @@ El primer programa que deberíamos echar a funcionar sería el test. Éste se en
   ./bin/test
   ```
   
-Todos los parámetros de configuración, tales como el número de generaciones a generar, tamaño de la población y el número de cromosomas por individuo son leídos desde un fichero .xml situado en el directorio actual y que contiene lo siguiente:
+Todos los parámetros de configuración, tales como el número de generaciones a generar, tamaño de la población y el número de cromosomas por individuo son leídos desde un fichero .xml situado en el directorio actual y contiene lo siguiente:
 
   ```xml
   <?xml version="1.0"?>
@@ -80,42 +80,52 @@ Todos los parámetros de configuración, tales como el número de generaciones a
   <config>
 	<tamPob>100</tamPob>
 	<numCro>1024</numCro>
-	<nGen>75</numCro>
+	<nGen>3</numCro>
   </config>
   ```
+  
+Si al ejecutarse el programa no aparece ningún mensaje en pantalla es que todo es satisfactorio y podremos proceder con confianza a usar las librerías para nuestros propios programas.
 
-```cpp
-// Realizo crossover entre dos individuos cogidos al azar (No me fijo en fitness ni nada)
-// Utilizo el crossover entre dos puntos tambien elegidos al azar
-// El resultado (dos hijos) lo almaceno en un nuevo vector de tamaño 2
-int ind1 = rand() % tamPob;
-int ind2 = rand() % tamPob;
-int p1 = rand() % numCro8;
-int p2 = rand() % numCro8;
-int menor = (p1<p2) ? p1 : p2;
-int mayor = (p1>p2) ? p1 : p2;
-vector< vector<unsigned char> > HIJOS;
-HIJOS.push_back(POB[ind1]);
-HIJOS.push_back(POB[ind2]);
-for(int i = menor; i <= mayor; ++i) {
-	HIJOS[0][i] = POB[ind2][i];
-	HIJOS[1][i] = POB[ind1][i];
-}
-```
-Para empezar, en `ind1` e `ind2` se almacena la posición de los individuos que van a reproducirse elegidos al azar. En `p1` y `p2` se almacena los puntos inicial y final del trozo de cadena a usar en el crossover (rango de cromosomas) también elegidos al azar. Como son aleatorios, compruebo quién es mayor y quién es menor y lo guardo en `menor` y `mayor`. Acto seguido copio en el vector `HIJOS` (de tamaño 2) los padres. Por último, recorro el trozo de cadena a copiar y la voy asignando a su correspondiente hijo: La cadena del padre1 se copia en su lugar correspondiente en hijo2 y la cadena del padre2 se copia en el hijo1.
-De esta forma hemos creado dos nuevos hijos a partir de los padres. Para aclarar el proceso, aquí un ejemplo, donde los padres tienen cadenas de tamaño 24 y el rango de cromosomas a copiar es del 8 al 15:
+Ahora procedemos a ejecutar nuestro algoritmo genético. Para ello, sin movernos del directorio actual ejecutamos:
 
-Padres `pad0` y `pad1`:
+  ```bash
+  ./bin/ag
+  ```
 
-	10100100`00110010`00010111        01111100`10101001`10010101
+Se habrá creado en la carpeta `res` un fichero .xml con la estadística relacionada. El nombre de dicho archivo estará estructurado y mostrará los parámetros usados en la ejecución del algoritmo. Así, el fichero `genetico2014-3-100-1024-24545` significa:
 
-Se copian los padres en `HIJOS[0]` e `HIJOS[1]`:
+  -`genetico2014` es el nombre del evento (Así lo he querido yo)
+  -`3` es el número de generaciones a generar
+  -`100` es el número de individuos que componen una población
+  -`1024` es el número de cromosomas que tiene un individuo
+  -`24545` es la hora de finalización de la ejecución en el formato `min(2)-hora(45)-seg(45)`
+  
+El contenido de dicho fichero estará compuesto por los parámetros usados (Nº de generaciones, Nº de individuos y Mº de cromosomas), estádistica de fitness de la población para cada generación (sumatoria, media y máximo) y por último el tiempo (en segundos) empleado en la ejecución del algoritmo. A continuación se muestra el fichero generado para el fichero de configuración anterior:
 
-	10100100`00110010`00010111        01111100`10101001`10010101
-	
-Se cruzan los cromosomas marcados quedando `HIJOS[0]` e `HIJOS[1]` de la siguiente forma:
-
-	10100100`10101001`00010111        01111100`00110010`10010101
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <resultados>
+  	<tamPob>100</tamPob>
+  	<numCro>1024</numCro>
+  	<nGen>3</nGen>
+  	<gen0>
+  		<totalFitness>51252</totalFitness>
+  		<fitMedia>512.52</fitMedia>
+  		<mejorFitness>550</mejorFitness>
+  	</gen0>
+  	<gen1>
+  		<totalFitness>52409</totalFitness>
+  		<fitMedia>524.09</fitMedia>
+  		<mejorFitness>547</mejorFitness>
+  	</gen1>
+  	<gen2>
+  	<totalFitness>53358</totalFitness>
+  		<fitMedia>533.58</fitMedia>
+  		<mejorFitness>559</mejorFitness>
+  	</gen2>
+  	<tiempo>0.003101110458374023</tiempo>
+  </resultados>
+  ```
 
 Ejecución del programa
 ----------------------
