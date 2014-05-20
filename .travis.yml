@@ -4,6 +4,4 @@ compiler:
 install: 
   - sudo wget http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.bz2/download -O /usr/include/boost_1_55_0.tar.bz2
   - sudo tar --bzip2 -xf /usr/include/boost_1_55_0.tar.bz2 -C /usr/include
-  - sudo apt-get update
-  - sudo apt-get install doxygen
-script: make && ./bin/test
+script: make test && ./bin/test
