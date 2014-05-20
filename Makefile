@@ -16,7 +16,7 @@ XMLFLAGS = -I/usr/include/boost_1_55_0
 
 # ************ Objetivos principales ************
 
-all: $(LIB)/Poblacion.a $(LIB)/Individuo.a $(BIN)/ag $(BIN)/test $(BIN)/generadorR documentacion
+all: Poblacion.a Individuo.a ag test generadorR documentacion
 
 # ************ Generación de documentación ******************
 
@@ -25,31 +25,31 @@ documentacion:
 
 # ************ Compilación de módulos y librerias ************
 
-$(OBJ)/Individuo.o: $(SRC)/Individuo.cpp $(INC)/Individuo.h
+Individuo.o: $(SRC)/Individuo.cpp $(INC)/Individuo.h
 	$(CXX) $(CPPFLAGS) $(SRC)/Individuo.cpp -o $(OBJ)/Individuo.o
-$(OBJ)/Poblacion.o: $(SRC)/Poblacion.cpp $(INC)/Poblacion.h
+Poblacion.o: $(SRC)/Poblacion.cpp $(INC)/Poblacion.h
 	$(CXX) $(CPPFLAGS) $(SRC)/Poblacion.cpp -o $(OBJ)/Poblacion.o
-$(OBJ)/ag.o : $(SRC)/ag.cpp
+ag.o : $(SRC)/ag.cpp
 	$(CXX) $(CPPFLAGS) $(XMLFLAGS) $(SRC)/ag.cpp -o $(OBJ)/ag.o
-$(OBJ)/test.o: $(SRC)/test.cpp
+test.o: $(SRC)/test.cpp
 	$(CXX) $(CPPFLAGS) $(XMLFLAGS) $(SRC)/test.cpp -o $(OBJ)/test.o
-$(OBJ)/generadorR.o: $(SRC)/generadorR.cpp
+generadorR.o: $(SRC)/generadorR.cpp
 	$(CXX) $(CPPFLAGS) $(XMLFLAGS) -std=c++11 $(SRC)/generadorR.cpp -o $(OBJ)/generadorR.o
 
 # ************ Bibliotecas ************
 
-$(LIB)/Individuo.a: $(OBJ)/Individuo.o
+Individuo.a: Individuo.o
 	$(LIBR) $(LIB)/Individuo.a $(OBJ)/Individuo.o
-$(LIB)/Poblacion.a: $(OBJ)/Poblacion.o
+Poblacion.a: Poblacion.o
 	$(LIBR) $(LIB)/Poblacion.a $(OBJ)/Poblacion.o
 
 # ************ Enlazado y creación de ejecutables ************
 
-$(BIN)/ag: $(OBJ)/ag.o $(OBJ)/Individuo.o $(OBJ)/Poblacion.o
+ag: ag.o Individuo.o Poblacion.o
 	$(CXX) $(OBJ)/ag.o $(OBJ)/Individuo.o $(OBJ)/Poblacion.o -o $(BIN)/ag
-$(BIN)/test: $(OBJ)/test.o $(OBJ)/Individuo.o $(OBJ)/Poblacion.o
+test: test.o Individuo.o Poblacion.o
 	$(CXX) $(OBJ)/test.o $(OBJ)/Individuo.o $(OBJ)/Poblacion.o -o $(BIN)/test
-$(BIN)/generadorR: $(OBJ)/generadorR.o
+generadorR: generadorR.o
 	$(CXX) $(OBJ)/generadorR.o -o $(BIN)/generadorR
 
 # ************ Limpieza ***************

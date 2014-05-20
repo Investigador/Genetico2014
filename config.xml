@@ -4,5 +4,5 @@
 <config>
 	<tamPob>100</tamPob>
 	<numCro>1024</numCro>
-	<nGen>75</numCro>
+	<nGen>3</numCro>
 </config>
