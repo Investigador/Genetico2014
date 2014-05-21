@@ -10,9 +10,12 @@ Lo podeis encontrar en mi repositorio [Genetico2014] (https://github.com/rotty11
   - obj
   - res
   - src
-  - config.xml
+  - .travis.yml
+  - Documentacion.md
   - LICENSE
   - Makefile
+  - README.md
+  - config.xml
 
 #####Creación del programa:
 
@@ -61,9 +64,13 @@ Para construir todo el proyecto, basta con abrir un intérprete de órdenes, dir
     - Poblacion.a
   - Documentación de Doxygen: (En la carpeta doc/html)
 
-Además, podemos ejecutar las órdenes `make clean` para borrar ficheros con código objeto y de edición (los acabados en ~), y `make mrproper` para borrar todo aquello que es construído con `make` (binarios, librerías, documentación y código objeto) además de los ficheros con resultados de las ejecuciones de los programas.
+Además, podemos ejecutar las órdenes `make clean` para borrar ficheros con código objeto y de edición (los acabados en ~), y `make mrproper` para borrar todo aquello que es construído con `make` (binarios, librerías, documentación y código objeto) además de los ficheros con resultados de las ejecuciones de los programas. De todas formas, podemos construir cualquiera de los binarios, librerías, códigos objeto y documentación por independiente con solo ejecutar:
 
-#####Funcionamiento y ejecución de los programas:
+  ```bash
+  make <objeto a construir>
+  ```
+
+#####Compilación de programas e integración continua:
 
 El primer programa que deberíamos echar a funcionar sería el test. Éste se encarga de comprobar que los operadores principales de un algoritmo genético implementados en las librerías funcionan correctamente. Para ejecutar el programa nos situamos en la raíz del proyecto y ejecutamos:
 
@@ -84,7 +91,22 @@ Todos los parámetros de configuración, tales como el número de generaciones a
   </config>
   ```
   
-Si al ejecutarse el programa no aparece ningún mensaje en pantalla es que todo es satisfactorio y podremos proceder con confianza a usar las librerías para nuestros propios programas.
+Si al ejecutarse el programa no aparece ningún mensaje en pantalla es que todo es satisfactorio y podremos proceder con confianza a usar las librerías para nuestros propios programas. De todas formas, mediante la integración continua, podemos realizar este test justo en el momento en que realizamos `git push` en nuestro repositorio. Para ello, basta con seguir las instrucciones de [este enlace] (http://docs.travis-ci.com/user/getting-started/). Nos pedirá hacer login en la página de `travis-ci`, aceptar los permisos para leer el repositorio y manipulación del mismo. Al final, lo que tendremos que hacer es crear el fichero `.travis.yml` en la raíz de nuestro proyecto y configurarlo para que haga lo que queramos justo antes del `git push`. Por ejemplo, mi fichero `.travis.yml` contiene:
+
+  ```yml
+  language: cpp
+  compiler:
+    - gcc
+  install: 
+    - sudo wget http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.bz2/download -O /usr/include/boost_1_55_0.tar.bz2
+    - sudo tar --bzip2 -xf /usr/include/boost_1_55_0.tar.bz2 -C /usr/include
+    #Decomentar las siguientes lineas y comentar la ultima para compilar absolutamente todo  
+    #- sudo apt-get install doxygen
+  #script: make && ./bin/test
+  script: make test && ./bin/test
+  ```
+
+Lo que estamos indicando es que usamos lenguaje `c++` y compilador `gcc`. Dado que necesito la librería `boost` para el tratamiento de XML, indico con `install` que el servidor travis la descargue y la coloque en `/usr/include` para posteriormente descomprimirla en el mismo directorio. Con `script` ordeno lo que quiero que haga en último lugar y, como es normal, construir y ejecutar el test. En la página de travis podemos ver el estado de la compilación. Si todo es correcto, aparecerá en verde el texto "passed", de lo contrario, "failed".
 
 Ahora procedemos a ejecutar nuestro algoritmo genético. Para ello, sin movernos del directorio actual ejecutamos:
 
