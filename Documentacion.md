@@ -106,7 +106,9 @@ Si al ejecutarse el programa no aparece ningún mensaje en pantalla es que todo 
   script: make test && ./bin/test
   ```
 
-Lo que estamos indicando es que usamos lenguaje `c++` y compilador `gcc`. Dado que necesito la librería `boost` para el tratamiento de XML, indico con `install` que el servidor travis la descargue y la coloque en `/usr/include` para posteriormente descomprimirla en el mismo directorio. Con `script` ordeno lo que quiero que haga en último lugar y, como es normal, construir y ejecutar el test. En la página de travis podemos ver el estado de la compilación. Si todo es correcto, aparecerá en verde el texto "passed", de lo contrario, "failed".
+Lo que estamos indicando es que usamos lenguaje `c++` y compilador `gcc`. Dado que necesito la librería `boost` para el tratamiento de XML, indico con `install` que el servidor de travis debe descargarla y colocarla en `/usr/include` para posteriormente descomprimirla en el mismo directorio. Con `script` ordeno lo que quiero que haga en último lugar y, como es normal, construir y ejecutar el test. En la página de travis podemos ver el estado de la compilación. Si todo es correcto, aparecerá en verde el texto "passed", de lo contrario, "failed".
+
+#####Ejecutando nuestro algoritmo genético
 
 Ahora procedemos a ejecutar nuestro algoritmo genético. Para ello, sin movernos del directorio actual ejecutamos:
 
@@ -114,7 +116,7 @@ Ahora procedemos a ejecutar nuestro algoritmo genético. Para ello, sin movernos
   ./bin/ag
   ```
 
-Se habrá creado en la carpeta `res` un fichero .xml con la estadística relacionada. El nombre de dicho archivo estará estructurado y mostrará los parámetros usados en la ejecución del algoritmo. Así, el fichero `genetico2014-3-100-1024-24545` significa:
+Se habrá creado en la carpeta `res` un fichero `.xml` con la estadística relacionada. El nombre de dicho archivo estará estructurado y mostrará los parámetros usados en la ejecución del algoritmo. Así, el fichero `genetico2014-3-100-1024-24545` significa:
 
   - `genetico2014` es el nombre del evento (Así lo he querido yo).
   - `3` es el número de generaciones a generar
@@ -149,8 +151,14 @@ El contenido de dicho fichero estará compuesto por los parámetros usados (Nº 
   </resultados>
   ```
 
-Ejecución del programa
-----------------------
+Este fichero `.xml` resultante puede ser analizado con el tercer programa incluído en el repositorio, llamado `generadorR`. Este programa lee como argumento un fichero `.xml` estructurado de la forma anterior y genera, en la carpeta `/res`, otro fichero llamado `tablaR.r` listo para ser leído por un intérprete del lenguaje R y generando una tabla estructurada con la anterior información para un posible tratamiento más personalizado. La forma de invocarlo es:
+
+  ```bash
+  ./bin/generadorR <fichero XML>
+  ```
+
+Profiling del algoritmo genético
+--------------------------------
 
   ```bash
   ./op_mut\&cross <Tamaño de la población> <Número de cromosomas>
