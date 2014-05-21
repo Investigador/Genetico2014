@@ -70,7 +70,7 @@ Además, podemos ejecutar las órdenes `make clean` para borrar ficheros con có
   make <objeto a construir>
   ```
 
-#####Compilación de programas e integración continua:
+#####Test de la librería e integración continua:
 
 El primer programa que deberíamos echar a funcionar sería el test. Éste se encarga de comprobar que los operadores principales de un algoritmo genético implementados en las librerías funcionan correctamente. Para ejecutar el programa nos situamos en la raíz del proyecto y ejecutamos:
 
