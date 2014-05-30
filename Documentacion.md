@@ -160,12 +160,15 @@ Este fichero `.xml` resultante puede ser analizado con el tercer programa inclu�
 Profiling del algoritmo genético
 --------------------------------
 
-Llegados a este punto, falta evaluar el rendimiento de nuestro algoritmo genético. Por supuesto, todo es mejorable. El hecho de usar, por ejemplo, modularización, conlleva una pérdida de rendimiento en llamadas a funciones, copia de parámetros (otros van por referencia), declaraciones de variables y demás. Estamos cambiando, por así decirlo, el rendimiento por modularización, reutilización, mantenimiento, abstracción, entre otros. Para el uso del profiling, lo que vamos a hacer es realizar mediciones cambiando los parámetros disponibles en el programa, a saber; Nº de generaciones, Nº de individuos por población y Nº de cromosomas por individuo. Además, haremos uso del profiler `gprof` para realizar una traza del algoritmo y ver qué funciones son las que más consumen recursos. ¡¡Podríamos llevarnos una sorpresa!!. En la siguiente tabla se muestra la comparativa de tiempos para nuestro algoritmo genético:
+Llegados a este punto, falta evaluar el rendimiento de nuestro algoritmo genético. Por supuesto, todo es mejorable. El hecho de usar, por ejemplo, modularización, conlleva una pérdida de rendimiento en llamadas a funciones, copia de parámetros (otros van por referencia), declaraciones de variables y demás. Estamos cambiando, por así decirlo, el rendimiento por modularización, reutilización, mantenimiento, abstracción, entre otros. Para el uso del profiling, lo que vamos a hacer es realizar mediciones cambiando los parámetros disponibles en el programa, a saber; Nº de generaciones y Nº de individuos por población, manteniendo el Nº de cromosomas por individuo. Además, haremos uso del profiler `gprof` para realizar una traza del algoritmo y ver qué funciones son las que más consumen recursos. ¡¡Podríamos llevarnos una sorpresa!!. En la siguiente tabla se muestra la comparativa de tiempos para nuestro algoritmo genético:
 
  Tam. población | Nº cromosomas | Nº generaciones | Mejor media de fitness | Tiempo de ejecución
 ----------------|---------------|-----------------|------------------------|--------------------
-       100      |      128      |  0.000873 s     |            0.000181 s  |          0.000094 s
-       100      |        256    |  0.001734 s     |            0.000354 s  |          0.000174 s
-       100      |       1024    |  0.002298 s     |            0.000459 s  |          0.000219 s
+       128      |      128      |        32       |       98.3828125       |     0.013034 s
+       128      |      512      |        32       |       364.3203125      |     0.020687 s
+       128      |      1024     |        32       |      1255.7421875      |     0.052391 s
+       128      |      128      |        32       |       98.3828125       |     0.013034 s
+       128      |      512      |        32       |       364.3203125      |     0.020687 s
+       128      |      128      |       128       |       105.5546875      |     0.049417 s
 
 Viendo la ventaja en tiempos de ejecución que esta implementación me ha proporcionado hasta ahora, y la facilidad para realizar mutaciones y crossover hace que me parezca una implementación adecuada para un algoritmo genético.
