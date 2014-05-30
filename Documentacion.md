@@ -166,9 +166,30 @@ Llegados a este punto, falta evaluar el rendimiento de nuestro algoritmo genéti
 ----------------|---------------|-----------------|------------------------|--------------------
        128      |      128      |        32       |       98.3828125       |     0.013034 s
        128      |      512      |        32       |       364.3203125      |     0.020687 s
-       128      |      1024     |        32       |      1255.7421875      |     0.052391 s
-       128      |      128      |        32       |       98.3828125       |     0.013034 s
-       128      |      512      |        32       |       364.3203125      |     0.020687 s
-       128      |      128      |       128       |       105.5546875      |     0.049417 s
+       128      |      2048     |        32       |      1255.7421875      |     0.052391 s
+       128      |      128      |       128       |       106.8828125      |     0.049417 s
+       128      |      512      |       128       |        425.53125       |     0.080253 s
+       128      |      2048     |       128       |        1480.8125       |     0.202097 s
+       128      |      128      |       512       |        113.15625       |     0.199811 s
+       128      |      512      |       512       |        467.46875       |     0.323740 s
+       128      |      2048     |       512       |       1732.046875      |     0.798970 s
 
-Viendo la ventaja en tiempos de ejecución que esta implementación me ha proporcionado hasta ahora, y la facilidad para realizar mutaciones y crossover hace que me parezca una implementación adecuada para un algoritmo genético.
+Podemos observar que al mantener el tamaño de la población y para un mismo número de cromosomas, el número de generaciones influye en la calidad del fitness dado que en cada generación se está mejorando el fitness de cada individuo y un nuevo cruce provoca hijos de mayor calidad. Variar cualquier parámetro tiene un impacto lineal en los tiempos de ejecución, siendo, hasta la fecha, lo mejor que se ha podido implementar. Aún así, vamos a hacer uso de `gprof` a ver qué dice. Para ello, lo primero que debemos hacer es añadir la opción `-pg` al compilar con g++ para añadir información de estadística y ejecutar nuestro programa (se generará el fichero `gmon.out`). Acto seguido, debemos ejecutar `gprof` pasándole el nombre de nuestro programa. En resumen:
+
+  - Compilar: g++ -pg ..... -o programa
+  - Ejecutar normalmente: ./programa <tus parámetros si es que los tiene>
+  - Gprof: gprof programa
+
+De esta forma, nos saldrá en pantalla información del porcentaje de tiempo consumido en las distintas llamadas a funciones, el número de llamadas (si puede) y otros parámetros. Me interesan los siguientes parámetros y sólo muestro las 7 primeras llamadas (Las que más consumen). Los resultados se han tomado con la `población = 128`, `cromosomas = 2048` y `generaciones = 512`:
+
+ % tiempo | Nº llamadas |                 Función         
+----------|-------------|------------------------------------------
+  22.39   |  40188003   |      Vector<unsigned char>::size()
+  10.45   |      -      |           Individuo::Evaluar()
+   8.96   |      -      |    Vector<unsigned char>::operator[]
+   6.72   |      -      |           Individuo::setCrom()
+   5.97   |      -      |          Individuo::operator[]
+   5.22   |   198019    |         Individuo::GetCrom(int)
+   4.48   |    2563     | _Vector_base::_M_allocate(unsigned long)
+
+Si observamos la tabla, ¡¡SORPRESA!!, casi la cuarta parte del tiempo es consumido llamando a la función que nos devuelve el tamaño del vector que almacena los cromosomas. Esto es una aberración. Se solucionaría fácilmente incluyendo este valor como variable privada en la clase `Individuo`. De esta forma el acceso sería directo y cuyo coste se vería reducido considerablemente. El resto de tiempos son bastantes normales teniendo en cuenta que la evaluación de todos los individuos es pesada.
